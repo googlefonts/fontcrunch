@@ -19,9 +19,9 @@
 
 from fontTools import ttLib
 from fontTools.ttLib.tables import _g_l_y_f
-import fromcubic
-import tocubic
-import pcorn
+from spiro import fromcubic
+from spiro import tocubic
+from spiro import pcorn
 import math
 import md5
 
