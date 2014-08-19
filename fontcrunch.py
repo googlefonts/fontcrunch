@@ -53,7 +53,7 @@ def glyph_to_bzs(g):
                     x0, y0 = lerppt(0.5, pts[j - 1], pts[j])
                 if not flags[(j+1) % n]:
                     x1, y1 = lerppt(0.5, (x1, y1), pts[j])
-                if pts[j] == (x0, y0) or pts[j] == (x1, y1):
+                if tuple(pts[j]) == (x0, y0) or tuple(pts[j]) == (x1, y1):
                     # degenerate quad, treat as line
                     bz.append(((x0, y0), (x1, y1)))
                 else:
