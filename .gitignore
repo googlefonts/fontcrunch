@@ -1,8 +1,11 @@
+quadopt
+
 # Compiled Object files
 *.slo
 *.lo
 *.o
 *.obj
+*.pyc
 
 # Compiled Dynamic libraries
 *.so
