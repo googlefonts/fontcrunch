@@ -14,7 +14,7 @@
 #
 # Contributor: Raph Levien
 
-SRC = $(wildcard */*.bez)
+SRC = $(wildcard bez/*/*.bez)
 OPT = $(patsubst %.bez, %.bezopt, $(SRC))
 
 all: quadopt $(OPT)
@@ -22,11 +22,14 @@ all: quadopt $(OPT)
 quadopt: quadopt.cc
 	$(CXX) $< -std=c++0x -O3 -o $@
 
-%.bezopt:	%.bez quadopt
+%.bezopt: %.bez quadopt
 	./quadopt $< $@
 
 clean:
 	rm -f quadopt
-	find . -name '*.bez' -delete
-	find . -name '*.bezopt' -delete
-	rmdir ??
+	find bez -name '*.bezopt' -delete
+
+distclean: clean
+	find bez -name '*.bez' -delete
+	rmdir bez/??
+	rmdir bez

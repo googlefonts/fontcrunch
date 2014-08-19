@@ -318,15 +318,18 @@ def seg_to_string(sp, bk0, bk1):
     return ''.join(res)
 
 USE_SUBDIRS = True
+PREFIX = 'bez/'
 
 # get filename, ensuring directory exists
 def seg_fn(segstr):
     fn = md5.new(segstr).hexdigest()[:16]
     if USE_SUBDIRS:
-        dirname = fn[:2]
+        dirname = PREFIX + fn[:2]
         if not os.path.exists(dirname):
-            os.mkdir(dirname)
+            os.makedirs(dirname)
         fn = dirname + '/' + fn[2:]
+    else:
+        fn = PREFIX + fn
     fn += '.bez'
     return fn
 
