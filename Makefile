@@ -17,7 +17,7 @@
 SRC = $(wildcard */*.bez)
 OPT = $(patsubst %.bez, %.bezopt, $(SRC))
 
-dummy: $(OPT)
+all: quadopt $(OPT)
 
 quadopt: quadopt.cc
 	$(CXX) $< -std=c++0x -O3 -o $@
