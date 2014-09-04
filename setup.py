@@ -17,7 +17,7 @@
 
 from setuptools import setup, Extension
 
-module1 = Extension('quadopt',
+module1 = Extension('_quadopt',
                     sources=['quadopt_wrap.cxx', 'quadopt.cc'],
                     extra_compile_args=['-std=c++0x', '-O3'])
 
