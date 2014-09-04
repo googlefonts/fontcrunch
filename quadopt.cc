@@ -22,16 +22,11 @@
 #include <vector>
 #include <algorithm>
 
+#include "quadopt.h"
+
 using std::vector;
 
 #define HALF_STEP 1
-
-class Point {
-public:
-	Point() : x(0), y(0) { }
-	Point(double x, double y) : x(x), y(y) { }
-	double x, y;
-};
 
 bool operator==(const Point& p0, const Point& p1) {
 	return p0.x == p1.x && p0.y == p1.y;
@@ -65,23 +60,11 @@ Point round(Point p) {
 	return Point(std::round(p.x), std::round(p.y));
 }
 
-class Quad {
-public:
-	Quad() : p() { }
-	Quad(Point p0, Point p1, Point p2) : p() {
-		p[0] = p0;
-		p[1] = p1;
-		p[2] = p2;
-	}
-	Point p[3];
-	double arclen() const;
-	Point eval(double t) const;
-	bool isLine() const;
-	void print(std::ostream& o) const {
-		o << p[0].x << " " << p[0].y << " " << p[1].x << " " << p[1].y << " "
-			<< p[2].x << " " << p[2].y << std::endl;
-	}
-};
+
+void Quad::print(std::ostream& o) const {
+	o << p[0].x << " " << p[0].y << " " << p[1].x << " " << p[1].y << " "
+		<< p[2].x << " " << p[2].y << std::endl;
+}
 
 bool Quad::isLine() const {
 	return p[1] == lerp(0.5, p[0], p[2]);
@@ -151,17 +134,6 @@ Point Quad::eval(double t) const {
 	Point p12(lerp(t, p[1], p[2]));
 	return lerp(t, p01, p12);
 }
-
-class Thetas {
-public:
-	void init(const vector<Quad>& qs);
-	Point xy(double s) const;
-	Point dir(double s) const;
-	double arclen;
-private:
-	vector<Point> xys;
-	vector<Point> dirs;
-};
 
 void Thetas::init(const vector<Quad>& qs) {
 	xys.clear();
