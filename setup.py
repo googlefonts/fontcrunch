@@ -37,5 +37,6 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python',
     ],
-    ext_modules=[module1]
+    ext_modules=[module1],
+    py_modules=['quadopt', ]
 )
