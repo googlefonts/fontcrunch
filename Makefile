@@ -17,9 +17,7 @@
 SRC = $(wildcard bez/*/*.bez)
 OPT = $(patsubst %.bez, %.bezopt, $(SRC))
 
-all:
-	swig -python -c++ quadopt.i
-	python setup.py build_ext --inplace
+all: quadopt $(OPT)
 
 quadopt: quadopt.cc
 	$(CXX) $< -std=c++0x -O3 -o $@
