@@ -69,74 +69,10 @@ except AttributeError:
     _newclass = 0
 
 
-class Point(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Point, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Point, name)
-    __repr__ = _swig_repr
-    def __init__(self, *args): 
-        this = _quadopt.new_Point(*args)
-        try: self.this.append(this)
-        except: self.this = this
-    __swig_setmethods__["x"] = _quadopt.Point_x_set
-    __swig_getmethods__["x"] = _quadopt.Point_x_get
-    if _newclass:x = _swig_property(_quadopt.Point_x_get, _quadopt.Point_x_set)
-    __swig_setmethods__["y"] = _quadopt.Point_y_set
-    __swig_getmethods__["y"] = _quadopt.Point_y_get
-    if _newclass:y = _swig_property(_quadopt.Point_y_get, _quadopt.Point_y_set)
-    __swig_destroy__ = _quadopt.delete_Point
-    __del__ = lambda self : None;
-Point_swigregister = _quadopt.Point_swigregister
-Point_swigregister(Point)
 
-class Quad(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Quad, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Quad, name)
-    __repr__ = _swig_repr
-    def __init__(self, *args): 
-        this = _quadopt.new_Quad(*args)
-        try: self.this.append(this)
-        except: self.this = this
-    __swig_setmethods__["p"] = _quadopt.Quad_p_set
-    __swig_getmethods__["p"] = _quadopt.Quad_p_get
-    if _newclass:p = _swig_property(_quadopt.Quad_p_get, _quadopt.Quad_p_set)
-    def arclen(self): return _quadopt.Quad_arclen(self)
-    def eval(self, *args): return _quadopt.Quad_eval(self, *args)
-    def isLine(self): return _quadopt.Quad_isLine(self)
-    def _print(self, *args): return _quadopt.Quad__print(self, *args)
-    __swig_destroy__ = _quadopt.delete_Quad
-    __del__ = lambda self : None;
-Quad_swigregister = _quadopt.Quad_swigregister
-Quad_swigregister(Quad)
-
-class Thetas(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Thetas, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Thetas, name)
-    __repr__ = _swig_repr
-    def init(self, *args): return _quadopt.Thetas_init(self, *args)
-    def xy(self, *args): return _quadopt.Thetas_xy(self, *args)
-    def dir(self, *args): return _quadopt.Thetas_dir(self, *args)
-    __swig_setmethods__["arclen"] = _quadopt.Thetas_arclen_set
-    __swig_getmethods__["arclen"] = _quadopt.Thetas_arclen_get
-    if _newclass:arclen = _swig_property(_quadopt.Thetas_arclen_get, _quadopt.Thetas_arclen_set)
-    def __init__(self): 
-        this = _quadopt.new_Thetas()
-        try: self.this.append(this)
-        except: self.this = this
-    __swig_destroy__ = _quadopt.delete_Thetas
-    __del__ = lambda self : None;
-Thetas_swigregister = _quadopt.Thetas_swigregister
-Thetas_swigregister(Thetas)
-
-
-def optimize(*args):
-  return _quadopt.optimize(*args)
-optimize = _quadopt.optimize
+def optimize_run(*args):
+  return _quadopt.optimize_run(*args)
+optimize_run = _quadopt.optimize_run
 # This file is compatible with both classic and new-style classes.
 
 
