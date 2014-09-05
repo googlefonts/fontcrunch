@@ -23,3 +23,10 @@ bez
 *.exe
 *.out
 *.app
+
+# IDE, virtualenv, build&dist folders etc
+.venv
+.idea
+build/
+dist/
+*.egg-info/
