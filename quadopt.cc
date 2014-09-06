@@ -447,9 +447,8 @@ void readBzs(vector<Quad>* result, std::istream& is) {
 		result->push_back(Quad(Point(x0, y0), Point(x1, y1), Point(x2, y2)));
 	}
 	// Round the endpoints, they must be on integers
-	(*result)[0].p[0] = round((*result)[0].p[0]);
-	Quad* lastq = &(*result)[(*result).size() - 1];
-	lastq->p[2] = round(lastq->p[2]);
+	result->front().p[0] = round(result->front().p[0]);
+	result->back().p[2] = round(result->back().p[2]);
 }
 
 void optimize_run(char* in, char* out) {
