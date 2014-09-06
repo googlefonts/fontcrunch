@@ -448,7 +448,7 @@ void readBzs(vector<Quad>* result, std::istream& is) {
 	}
 	// Round the endpoints, they must be on integers
 	(*result)[0].p[0] = round((*result)[0].p[0]);
-	Quad* lastq = &(*result)[(*result).size()];
+	Quad* lastq = &(*result)[(*result).size() - 1];
 	lastq->p[2] = round(lastq->p[2]);
 }
 
