@@ -447,32 +447,11 @@ void readBzs(vector<Quad>* result, std::istream& is) {
 		result->push_back(Quad(Point(x0, y0), Point(x1, y1), Point(x2, y2)));
 	}
 	// Round the endpoints, they must be on integers
-	(*result)[0].p[0] = round((*result)[0].p[0]);
-	Quad* lastq = &(*result)[(*result).size()];
-	lastq->p[2] = round(lastq->p[2]);
+	result->front().p[0] = round(result->front().p[0]);
+	result->back().p[2] = round(result->back().p[2]);
 }
 
 void optimize_run(char* in, char* out) {
-    vector<Quad> bzs;
-    std::ifstream is;
-    is.open(in);
-    readBzs(&bzs, is);
-    Thetas thetas;
-    thetas.init(bzs);
-
-    vector<Quad> optbzs = optimize(thetas);
-    std::ofstream os;
-    os.open(out);
-    for (size_t i = 0; i < optbzs.size(); i++) {
-        optbzs[i].print(os);
-    }
-}
-
-int main(int argc, char** argv) {
-	if (argc != 3) {
-		std::cerr << "usage: quadopt in out\n";
-		return 1;
-	}
 #if 0
 	Quad q(Point(100, 0), Point(0, 0), Point(0, 100));
 	std::cout.precision(8);
@@ -480,7 +459,7 @@ int main(int argc, char** argv) {
 #endif
 	vector<Quad> bzs;
 	std::ifstream is;
-	is.open(argv[1]);
+	is.open(in);
 	readBzs(&bzs, is);
 	Thetas thetas;
 	thetas.init(bzs);
@@ -492,9 +471,18 @@ int main(int argc, char** argv) {
 #endif
 	vector<Quad> optbzs = optimize(thetas);
 	std::ofstream os;
-	os.open(argv[2]);
+	os.open(out);
 	for (size_t i = 0; i < optbzs.size(); i++) {
 		optbzs[i].print(os);
 	}
+}
+
+int main(int argc, char** argv) {
+	if (argc != 3) {
+		std::cerr << "usage: quadopt in out\n";
+		return 1;
+	}
+
+	optimize_run(argv[1], argv[2]);
 	return 0;
 }
