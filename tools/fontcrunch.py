@@ -1,6 +1,6 @@
 import sys
 
-from fontcrunch import generate, repack
+from fontcrunch.fontcrunch import generate, repack
 
 
 def main(argv):

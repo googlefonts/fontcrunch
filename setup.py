@@ -19,7 +19,7 @@ from setuptools import setup, Extension
 
 module1 = Extension('_quadopt',
                     sources=['quadopt_wrap.cxx', 'quadopt.cc'],
-                    extra_compile_args=['-std=c++0x', '-O0'])
+                    extra_compile_args=['-std=c++0x', '-O3'])
 
 setup(
     name="FontCrunch",
