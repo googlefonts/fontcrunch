@@ -28,7 +28,7 @@ setup(
     description='fontcrunch',
     author='Raph Levien',
     packages=["spiro", "fontcrunch"],
-    scripts=['tools/fontcrunch.py'],
+    scripts=['tools/font-crunch.py'],
     zip_safe=False,
     classifiers=[
         'Environment :: Console',
