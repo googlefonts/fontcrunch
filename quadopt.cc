@@ -21,6 +21,7 @@
 #include <cmath>
 #include <vector>
 #include <algorithm>
+#include <sstream>
 
 using std::vector;
 
@@ -451,15 +452,13 @@ void readBzs(vector<Quad>* result, std::istream& is) {
 	result->back().p[2] = round(result->back().p[2]);
 }
 
-void optimize_run(char* in, char* out) {
+void optimize(std::istream& is, std::ostream& os) {
 #if 0
 	Quad q(Point(100, 0), Point(0, 0), Point(0, 100));
 	std::cout.precision(8);
 	std::cout << q.arclen() << "\n";
 #endif
 	vector<Quad> bzs;
-	std::ifstream is;
-	is.open(in);
 	readBzs(&bzs, is);
 	Thetas thetas;
 	thetas.init(bzs);
@@ -470,11 +469,25 @@ void optimize_run(char* in, char* out) {
 	}
 #endif
 	vector<Quad> optbzs = optimize(thetas);
-	std::ofstream os;
-	os.open(out);
 	for (size_t i = 0; i < optbzs.size(); i++) {
 		optbzs[i].print(os);
 	}
+}
+
+void optimize(char* in, char* out) {
+	std::ifstream is;
+	is.open(in);
+	std::ofstream os;
+	os.open(out);
+	optimize(is, os);
+}
+
+std::string optimize(const std::string& in) {
+	std::istringstream is(in);
+	std::ostringstream os;
+	optimize(is, os);
+
+	return os.str();
 }
 
 int main(int argc, char** argv) {
@@ -483,6 +496,6 @@ int main(int argc, char** argv) {
 		return 1;
 	}
 
-	optimize_run(argv[1], argv[2]);
+	optimize(argv[1], argv[2]);
 	return 0;
 }

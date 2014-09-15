@@ -27,7 +27,7 @@ setup(
     url='https://github.com/googlefonts/fontcrunch/',
     description='fontcrunch',
     author='Raph Levien',
-    packages=["spiro", "fontcrunch"],
+    packages=["fontcrunch"],
     scripts=['tools/font-crunch.py'],
     zip_safe=False,
     classifiers=[

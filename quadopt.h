@@ -1,4 +1,1 @@
-using namespace std;
-
-
-void optimize_run(char* in, char* out);
+std::string optimize(const std::string& in);
