@@ -6,8 +6,7 @@ fontcrunch is a program that optimizes TrueType font splines - a "simplify" comm
 It tries to create a visual match for the spline using the smallest number of TrueType points. 
 It is notable for counting on-curve points interpolated between two off-curve points as "free," making useful filesize savings.
 
-It depends on [fonttools](https://github.com/behdad/fontTools), and has some legacy dependencies on [spiro-0.01](http://www.levien.com/spiro/spiro-0.01.tar.gz)
-This code is available under the Apache v2 license. Spiro code is GNU GPL v2 or later, and Spiro curves are subject to a US patent.
+It depends on [fonttools](https://github.com/behdad/fontTools).
 
 fontcrunch is an personal project, not an official Google project, and Google provides no support for it.
 
