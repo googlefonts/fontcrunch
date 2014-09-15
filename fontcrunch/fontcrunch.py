@@ -343,6 +343,24 @@ def gen_segs(glyph):
                 fn = seg_fn(segstr)
                 file(fn, 'w').write(segstr)
 
+def optimize_glyph(glyph):
+    import quadopt
+    bzs = glyph_to_bzs(glyph)
+    newbzs = []
+    for sp in bzs:
+        bks = segment_sp(sp)
+        newsp = []
+        for i in range(len(bks)):
+            bk0, bk1 = bks[i], bks[(i + 1) % len(bks)]
+            if bk1 != (bk0 + 1) % len(sp) or len(sp[bk0]) != 2:
+                segstr = seg_to_string(sp, bk0, bk1)
+                optstr = quadopt.optimize(segstr)
+                newsp.extend(parse_bzs(optstr.strip()))
+            else:
+                newsp.append(sp[bk0])
+        newbzs.append(newsp)
+    bzs_to_glyph(newbzs, glyph)
+
 def generate(fn):
     f = ttLib.TTFont(fn)
     glyf = f['glyf']
@@ -354,6 +372,16 @@ def generate(fn):
 def read_bzs(fn):
     result = []
     for l in file(fn):
+        z = [float(z) for z in l.split()]
+        bz = ((z[0], z[1]), (z[2], z[3]), (z[4], z[5]))
+        if bz[1] == lerppt(0.5, bz[0], bz[2]):
+            bz = (bz[0], bz[2])
+        result.append(bz)
+    return result
+
+def parse_bzs(segstr):
+    result = []
+    for l in segstr.split("\n"):
         z = [float(z) for z in l.split()]
         bz = ((z[0], z[1]), (z[2], z[3]), (z[4], z[5]))
         if bz[1] == lerppt(0.5, bz[0], bz[2]):
@@ -411,3 +439,13 @@ def repack(fn, newfn):
             repack_glyph(g)
     if newfn:
         f.save(newfn)
+
+def optimize(fn, newfn):
+    f = ttLib.TTFont(fn)
+    glyf = f['glyf']
+    for name in glyf.keys():
+        g = glyf[name]
+        print 'optimizing', name
+        optimize_glyph(g)
+
+    f.save(newfn)
