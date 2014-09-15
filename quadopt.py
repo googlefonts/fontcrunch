@@ -70,9 +70,9 @@ except AttributeError:
 
 
 
-def optimize_run(*args):
-  return _quadopt.optimize_run(*args)
-optimize_run = _quadopt.optimize_run
+def optimize(*args):
+  return _quadopt.optimize(*args)
+optimize = _quadopt.optimize
 # This file is compatible with both classic and new-style classes.
 
 
