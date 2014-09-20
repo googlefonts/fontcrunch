@@ -21,10 +21,10 @@ from fontTools import ttLib
 from fontTools.ttLib.tables import _g_l_y_f
 import math
 import md5
-import quadopt
 
 import os
 
+from . import quadopt
 
 def lerppt(t, p0, p1):
     return (p0[0] + t * (p1[0] - p0[0]), p0[1] + t * (p1[1] - p0[1]))
