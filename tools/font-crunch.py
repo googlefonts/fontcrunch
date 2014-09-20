@@ -1,13 +1,11 @@
 import sys
 
-from fontcrunch.fontcrunch import generate, repack
+from fontcrunch import optimize
 
 
 def main(argv):
-    if argv[1] == 'gen':
-        generate(sys.argv[2])
-    elif argv[1] == 'pack':
-        repack(sys.argv[2], sys.argv[3] if len(argv) >= 3 else None)
+    if len(argv) >= 2:
+        optimize(sys.argv[1], sys.argv[2] if len(argv) >= 3 else sys.argv[1])
 
 
 if __name__ == '__main__':
