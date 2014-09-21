@@ -18,6 +18,7 @@
 # Contributor: Raph Levien
 
 from fontTools import ttLib
+from fontTools.pens.basePen import BasePen
 from fontTools.ttLib.tables import _g_l_y_f
 import math
 import md5
@@ -25,6 +26,26 @@ import md5
 import os
 
 from . import quadopt
+
+class PDFPen(BasePen):
+    def __init__(self, glyphSet, path):
+        BasePen.__init__(self, glyphSet)
+        self.path = path
+
+    def _moveTo(self, p):
+        (x,y) = p
+        self.path.moveTo(x,y)
+
+    def _lineTo(self, p):
+        (x,y) = p
+        self.path.lineTo(x,y)
+
+    def _curveToOne(self, p1, p2, p3):
+        (x1,y1) = p1
+        (x2,y2) = p2
+        (x3,y3) = p3
+        self.path.curveTo(x1, y1, x2, y2, x3, y3)
+
 
 def lerppt(t, p0, p1):
     return (p0[0] + t * (p1[0] - p0[0]), p0[1] + t * (p1[1] - p0[1]))
@@ -155,12 +176,55 @@ def bzs_to_glyph(bzs, glyph):
     glyph.flags = flags
     glyph.endPtsOfContours = endPtsOfContours
 
-def optimize(fn, newfn):
+def plot_glyph(font, name, canvas, orig):
+    if canvas is None:
+        return
+    from reportlab.lib.colors import CMYKColor
+
+    gs = font.getGlyphSet()
+    glyph = gs[name]
+    pen = PDFPen(gs, canvas.beginPath())
+    glyph.draw(pen)
+
+    if orig:
+        color = CMYKColor(0, 1, 1, 0, alpha=.5)
+    else:
+        color = CMYKColor(0, 0, 0, 1, alpha=.5)
+
+    x0 = 100
+    y0 = 100
+    scale = 0.25
+
+    canvas.saveState()
+
+    canvas.setFillColor(color)
+    canvas.translate(x0, y0)
+    canvas.scale(scale, scale)
+    canvas.drawPath(pen.path, stroke=False, fill=True)
+
+    canvas.restoreState()
+
+    if not orig:
+        canvas.showPage()
+
+def optimize(fn, newfn, plot=None):
     f = ttLib.TTFont(fn)
     glyf = f['glyf']
+
+    pdf = None
+    if plot is not None:
+        from reportlab.pdfgen import canvas
+        pdf = canvas.Canvas(plot)
+
     for name in glyf.keys():
         g = glyf[name]
+        plot_glyph(f, name, pdf, True)
+
         print 'optimizing', name
         optimize_glyph(g)
 
+        plot_glyph(f, name, pdf, False)
+
     f.save(newfn)
+    if plot is not None:
+        pdf.save()
