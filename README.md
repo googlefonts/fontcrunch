@@ -17,7 +17,7 @@ On a fast computer, it should go through about 5 glyphs a second, depending on c
 
 Run the optimizer on all glyphs in a TrueType font and generate a new one. You can look at the outlines to check the quality of the result.
 
-`python tools/font-crunch.py yourfont.ttf newfont.ttf /tmp/outlines.pdf`
+`python tools/font-crunch.py yourfont.ttf -o newfont.ttf -d /tmp/outlines.pdf`
 
 ## How It Works
 
