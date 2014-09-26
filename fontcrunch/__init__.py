@@ -1,0 +1,1 @@
+from .fontcrunch import optimize
