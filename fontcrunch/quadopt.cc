@@ -452,7 +452,9 @@ void readBzs(vector<Quad>* result, std::istream& is) {
 	result->back().p[2] = round(result->back().p[2]);
 }
 
-void optimize(std::istream& is, std::ostream& os) {
+std::string optimize(const std::string& in) {
+	std::istringstream is(in);
+	std::ostringstream os;
 #if 0
 	Quad q(Point(100, 0), Point(0, 0), Point(0, 100));
 	std::cout.precision(8);
@@ -472,12 +474,6 @@ void optimize(std::istream& is, std::ostream& os) {
 	for (size_t i = 0; i < optbzs.size(); i++) {
 		optbzs[i].print(os);
 	}
-}
-
-std::string optimize(const std::string& in) {
-	std::istringstream is(in);
-	std::ostringstream os;
-	optimize(is, os);
 
 	return os.str();
 }
