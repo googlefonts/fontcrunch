@@ -474,28 +474,10 @@ void optimize(std::istream& is, std::ostream& os) {
 	}
 }
 
-void optimize(char* in, char* out) {
-	std::ifstream is;
-	is.open(in);
-	std::ofstream os;
-	os.open(out);
-	optimize(is, os);
-}
-
 std::string optimize(const std::string& in) {
 	std::istringstream is(in);
 	std::ostringstream os;
 	optimize(is, os);
 
 	return os.str();
-}
-
-int main(int argc, char** argv) {
-	if (argc != 3) {
-		std::cerr << "usage: quadopt in out\n";
-		return 1;
-	}
-
-	optimize(argv[1], argv[2]);
-	return 0;
 }
