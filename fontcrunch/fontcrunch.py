@@ -126,7 +126,7 @@ def seg_to_string(sp, bk0, bk1):
         res.append(' '.join(['%g' % z for xy in bz for z in xy]) + '\n')
     return ''.join(res)
 
-def optimize_glyph(glyph):
+def optimize_glyph(glyph, penalty=None):
     bzs = glyph_to_bzs(glyph)
     newbzs = []
     for sp in bzs:
@@ -136,7 +136,10 @@ def optimize_glyph(glyph):
             bk0, bk1 = bks[i], bks[(i + 1) % len(bks)]
             if bk1 != (bk0 + 1) % len(sp) or len(sp[bk0]) != 2:
                 segstr = seg_to_string(sp, bk0, bk1)
-                optstr = quadopt.optimize(segstr)
+                if penalty:
+                    optstr = quadopt.optimize(segstr, penalty)
+                else:
+                    optstr = quadopt.optimize(segstr)
                 newsp.extend(read_bzs(optstr.strip()))
             else:
                 newsp.append(sp[bk0])
@@ -207,7 +210,7 @@ def plot_glyph(font, name, canvas, orig):
     if not orig:
         canvas.showPage()
 
-def optimize(fn, newfn, plot=None):
+def optimize(fn, newfn, plot=None, penalty=None):
     f = ttLib.TTFont(fn)
     glyf = f['glyf']
 
@@ -221,7 +224,7 @@ def optimize(fn, newfn, plot=None):
         plot_glyph(f, name, pdf, True)
 
         print 'optimizing', name
-        optimize_glyph(g)
+        optimize_glyph(g, penalty)
 
         plot_glyph(f, name, pdf, False)
 

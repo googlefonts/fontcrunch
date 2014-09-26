@@ -70,8 +70,8 @@ except AttributeError:
 
 
 
-def optimize(*args):
-  return _quadopt.optimize(*args)
+def optimize(*args, **kwargs):
+  return _quadopt.optimize(*args, **kwargs)
 optimize = _quadopt.optimize
 # This file is compatible with both classic and new-style classes.
 

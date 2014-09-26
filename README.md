@@ -12,10 +12,11 @@ fontcrunch is an personal project, not an official Google project, and Google pr
 
 ## Usage
 
-You can control the level of precision by editing "penalty" in the code (should of course be a parameter).
 On a fast computer, it should go through about 5 glyphs a second, depending on complexity.
 
 Run the optimizer on all glyphs in a TrueType font and generate a new one. You can look at the outlines to check the quality of the result.
+
+You can control the level of precision by using "penalty" option of the optimizer (`-p`).
 
 `python tools/font-crunch.py yourfont.ttf -o newfont.ttf -d /tmp/outlines.pdf`
 
