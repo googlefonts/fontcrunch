@@ -69,10 +69,19 @@ except AttributeError:
     _newclass = 0
 
 
+def _swig_setattr_nondynamic_method(set):
+    def set_attr(self,name,value):
+        if (name == "thisown"): return self.this.own(value)
+        if hasattr(self,name) or (name == "this"):
+            set(self,name,value)
+        else:
+            raise AttributeError("You cannot add attributes to %s" % self)
+    return set_attr
+
+
 
 def optimize(*args, **kwargs):
   return _quadopt.optimize(*args, **kwargs)
 optimize = _quadopt.optimize
-# This file is compatible with both classic and new-style classes.
 
 

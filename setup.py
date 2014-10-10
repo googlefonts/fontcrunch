@@ -17,8 +17,9 @@
 
 from setuptools import setup, Extension
 
-module1 = Extension('fontcrunch._quadopt',
-                    sources=['fontcrunch/quadopt_wrap.cxx', 'fontcrunch/quadopt.cc'],
+quadopt = Extension('fontcrunch._quadopt',
+                    sources=['fontcrunch/quadopt.i', 'fontcrunch/quadopt.cc'],
+                    swig_opts=['-c++', '-modern'],
                     extra_compile_args=['-std=c++0x', '-O3'])
 
 setup(
@@ -37,5 +38,6 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python',
     ],
-    ext_modules=[module1],
+    ext_modules=[quadopt],
+    py_modules=['fontcrunch.quadopt'],
 )
