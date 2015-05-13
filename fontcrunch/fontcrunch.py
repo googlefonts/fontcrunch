@@ -22,9 +22,6 @@ from fontTools import ttLib
 from fontTools.pens.basePen import BasePen
 from fontTools.ttLib.tables import _g_l_y_f
 import math
-import md5
-
-import os
 
 from . import quadopt
 
