@@ -17,6 +17,7 @@
 #
 # Contributor: Raph Levien
 
+from __future__ import print_function
 from fontTools import ttLib
 from fontTools.pens.basePen import BasePen
 from fontTools.ttLib.tables import _g_l_y_f
@@ -223,7 +224,7 @@ def optimize(fn, newfn, plot=None, penalty=None):
         g = glyf[name]
         plot_glyph(f, name, pdf, True)
 
-        print 'optimizing', name
+        print('optimizing', name)
         optimize_glyph(g, penalty)
 
         plot_glyph(f, name, pdf, False)
