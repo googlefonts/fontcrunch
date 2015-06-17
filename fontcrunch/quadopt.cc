@@ -120,8 +120,8 @@ class ArclenFunctor {
 public:
 	ArclenFunctor(const Quad& q)
 			: dx0(2 * (q.p[1].x - q.p[0].x))
-			, dx1(2 * (q.p[2].x - q.p[1].x))
 			, dy0(2 * (q.p[1].y - q.p[0].y))
+			, dx1(2 * (q.p[2].x - q.p[1].x))
 			, dy1(2 * (q.p[2].y - q.p[1].y)) { }
 	void operator()(double dydx[1], double t, const double y[1]) {
 		Point p(deriv(t));
