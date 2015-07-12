@@ -20,7 +20,7 @@ from setuptools import setup, Extension
 quadopt = Extension('fontcrunch._quadopt',
                     sources=['fontcrunch/quadopt.i', 'fontcrunch/quadopt.cc'],
                     swig_opts=['-c++', '-modern'],
-                    extra_compile_args=['-std=c++0x', '-O3'])
+                    extra_compile_args=['-std=c++11', '-O3'])
 
 setup(
     name="FontCrunch",

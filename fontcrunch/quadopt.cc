@@ -381,7 +381,7 @@ void findBreaks(vector<Break>* breaks, const Thetas& curve) {
 
 bool intersect(Point* result, Point p0, Point dir0, Point p1, Point dir1) {
 	double det = dir0.x * dir1.y - dir0.y * dir1.x;
-	if (std::abs(det) < 1e-6) return false;
+	if (std::abs(det) < 1e-6 || std::isnan(det)) return false;
 	det = 1 / det;
 	double a = p0.y * dir0.x - p0.x * dir0.y;
 	double b = p1.y * dir1.x - p1.x * dir1.y;
