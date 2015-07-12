@@ -272,9 +272,8 @@ private:
 // of angle mismatch
 double measureQuad(const Thetas& curve, double s0, double s1, const Quad& q) {
 	ArclenFunctor derivs(q);
-	double ss = 0;
-	if (q.arclen() != 0)
-		ss = (s1 - s0) / q.arclen();
+	double ss = (s1 - s0) / q.arclen();
+	if (std::isnan(ss)) ss = 0;
 	MeasureFunctor err(curve, s0, ss, derivs, q);
 	const int n = 10;
 	double dt = 1./n;
