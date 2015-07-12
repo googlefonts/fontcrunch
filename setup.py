@@ -29,7 +29,7 @@ setup(
     description='fontcrunch',
     author='Raph Levien',
     packages=["fontcrunch"],
-    scripts=['tools/font-crunch.py'],
+    scripts=['tools/font-crunch'],
     zip_safe=False,
     classifiers=[
         'Environment :: Console',
