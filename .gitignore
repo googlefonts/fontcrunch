@@ -30,5 +30,4 @@ bez
 build/
 dist/
 *.egg-info/
-/fontcrunch/quadopt.py
 /fontcrunch/quadopt_wrap.cpp
