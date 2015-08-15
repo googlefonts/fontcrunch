@@ -10,12 +10,13 @@ def main(args):
     outfile = args.outfile
     plotfile = args.plotfile
     penalty = args.penalty
+    quiet = args.quiet
 
     if not outfile:
         base, ext = path.splitext(infile)
         outfile = base + "-opt" + ext
 
-    optimize(infile, outfile, plotfile, penalty)
+    optimize(infile, outfile, plotfile, penalty, quiet)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Optimize TrueType font splines.")
@@ -23,5 +24,6 @@ if __name__ == '__main__':
     parser.add_argument("-o", dest="outfile", metavar="FILE", help="name of output font to write")
     parser.add_argument("-p", dest="penalty", metavar="NUM", type=float, help="precision level")
     parser.add_argument("-d", dest="plotfile", metavar="FILE", help="name of glyphs plot file")
+    parser.add_argument("-q", dest="quiet", action="store_true", help="don't print messages to stdout")
 
     main(parser.parse_args())

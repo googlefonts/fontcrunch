@@ -208,7 +208,7 @@ def plot_glyph(font, name, canvas, orig):
     if not orig:
         canvas.showPage()
 
-def optimize(fn, newfn, plot=None, penalty=None):
+def optimize(fn, newfn, plot=None, penalty=None, quiet=False):
     f = ttLib.TTFont(fn)
     glyf = f['glyf']
 
@@ -221,7 +221,8 @@ def optimize(fn, newfn, plot=None, penalty=None):
         g = glyf[name]
         plot_glyph(f, name, pdf, True)
 
-        print('optimizing', name)
+        if not quiet:
+            print('optimizing', name)
         optimize_glyph(g, penalty)
 
         plot_glyph(f, name, pdf, False)
