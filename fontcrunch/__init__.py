@@ -21,8 +21,8 @@ def _get_args(names, font, pdf, penalty, quiet):
         yield font, name, pdf, penalty, quiet
 
 def optimize(fn, newfn, plot=None, penalty=None, quiet=False, jobs=None):
-    f = ttLib.TTFont(fn)
-    glyf = f['glyf']
+    font = ttLib.TTFont(fn)
+    glyf = font['glyf']
 
     pdf = None
     if plot is not None:
@@ -31,11 +31,11 @@ def optimize(fn, newfn, plot=None, penalty=None, quiet=False, jobs=None):
 
     if jobs:
         pool = Pool(jobs)
-        pool.map(_optimize, _get_args(glyf.keys(), f, pdf, penalty, quiet))
+        pool.map(_optimize, _get_args(glyf.keys(), font, pdf, penalty, quiet))
         pool.close()
     else:
-        map(_optimize, _get_args(glyf.keys(), f, pdf, penalty, quiet))
+        map(_optimize, _get_args(glyf.keys(), font, pdf, penalty, quiet))
 
-    f.save(newfn)
+    font.save(newfn)
     if plot is not None:
         pdf.save()
