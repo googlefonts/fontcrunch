@@ -15,6 +15,7 @@ def _optimize(args):
     plot_glyph(font, name, pdf, False)
     if not quiet:
         print('done optimizing', name)
+    return (name, glyph)
 
 def _get_args(names, font, pdf, penalty, quiet):
     for name in names:
@@ -29,12 +30,16 @@ def optimize(fn, newfn, plot=None, penalty=None, quiet=False, jobs=None):
         from reportlab.pdfgen import canvas
         pdf = canvas.Canvas(plot)
 
+    glyphs = []
     if jobs:
         pool = Pool(jobs)
-        pool.map(_optimize, _get_args(glyf.keys(), font, pdf, penalty, quiet))
+        glyphs = pool.map(_optimize, _get_args(glyf.keys(), font, pdf, penalty, quiet))
         pool.close()
     else:
-        map(_optimize, _get_args(glyf.keys(), font, pdf, penalty, quiet))
+        glyphs = map(_optimize, _get_args(glyf.keys(), font, pdf, penalty, quiet))
+
+    for name, glyph in glyphs:
+        font['glyf'][name] = glyph
 
     font.save(newfn)
     if plot is not None:
