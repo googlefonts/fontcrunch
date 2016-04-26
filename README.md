@@ -8,7 +8,7 @@ It is notable for counting on-curve points interpolated between two off-curve po
 
 It depends on [fonttools](https://github.com/behdad/fontTools).
 
-fontcrunch is an personal project, not an official Google project, and Google provides no support for it.
+fontcrunch is a personal project, not an official Google project, and Google provides no support for it.
 
 ## Usage
 
